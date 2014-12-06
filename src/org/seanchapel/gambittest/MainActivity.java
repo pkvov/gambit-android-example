@@ -20,29 +20,29 @@ public class MainActivity extends Activity
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState)
-		{
+    {
         super.onCreate(savedInstanceState);
 
-				initGambit();
+        initGambit();
 
 
-				TextView  tv = new TextView(this);
-				String fib = testFib();
-				String ls = testPorts();
+        TextView  tv = new TextView(this);
+        String fib = testFib();
+        String add3 = testAdd3();
+        String ls = testPorts();
 
-        tv.setText(fib + "\n" + ls);
+        tv.setText(fib + "\n" + add3 + '\n' + ls);
         setContentView(tv);
     }
 
-		public native String testFib();
+    public native String testFib();
+    public native String testAdd3();
+    public native void initGambit();
+    public native String testPorts();
 
-		public native void initGambit();
-
-		public native String testPorts();
-
-		static
-		{
-			System.loadLibrary("gambit");
-		}
+    static
+    {
+        System.loadLibrary("gambit");
+    }
 
 }

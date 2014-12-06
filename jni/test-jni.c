@@ -33,11 +33,12 @@ ___setup_params_struct setup_params;
 
 int fib(int x);
 char* testports();
+int add3(int x);
 
 jstring Java_org_seanchapel_gambittest_MainActivity_testFib(JNIEnv *env, jobject obj)
 {
-	char buffer[100];
-	int n = sprintf(buffer, "fib of 10 is: %d", fib(10));
+    char buffer[100];
+    int n = sprintf(buffer, "fib of 10 is: %d", fib(10));
 	
     return (*env)->NewStringUTF(env, buffer);
 }
@@ -47,10 +48,17 @@ jstring Java_org_seanchapel_gambittest_MainActivity_testPorts(JNIEnv *env, jobje
     return (*env)->NewStringUTF(env, testports());
 }
 
+jstring Java_org_seanchapel_gambittest_MainActivity_testAdd3(JNIEnv *env, jobject obj)
+{
+    char buffer[100];
+    int n = sprintf(buffer, "add 3 of 100 is: %d", add3(100));
+    return (*env)->NewStringUTF(env, buffer);
+}
+
 void Java_org_seanchapel_gambittest_MainActivity_initGambit(JNIEnv *env, jobject obj)
 {
-	// Taken from gambit, lib/main.c. 
-	int debug_settings = ___DEBUG_SETTINGS_INITIAL;
+    // Taken from gambit, lib/main.c. 
+    int debug_settings = ___DEBUG_SETTINGS_INITIAL;
 
     // -:d- (force repl io to be stdin/stdout since terminal isn't
     // -attached)
@@ -73,9 +81,9 @@ void Java_org_seanchapel_gambittest_MainActivity_initGambit(JNIEnv *env, jobject
            << ___DEBUG_SETTINGS_ERROR_SHIFT);
 
     ___setup_params_reset (&setup_params);
-	setup_params.version = ___VERSION;
-	setup_params.linker = LINKER;
+    setup_params.version = ___VERSION;
+    setup_params.linker = LINKER;
     setup_params.debug_settings = debug_settings;
 	
-	___setup(&setup_params);
+    ___setup(&setup_params);
 }
